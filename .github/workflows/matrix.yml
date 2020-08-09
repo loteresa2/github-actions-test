@@ -30,4 +30,5 @@ jobs:
         run: |
             node -v
             echo "Is ubuntu8? ${IS_UBUNTU_8}"
+            echo "From matrix is ubuntu8? ${matrix.is_ubuntu_8}"
 

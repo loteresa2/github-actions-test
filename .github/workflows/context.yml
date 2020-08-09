@@ -41,3 +41,19 @@ jobs:
           echo ${{ startsWith('hello', 'he')}}
           echo ${{ endsWith('hello', 'lo')}}
           echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!')}}
+  continue-on-error-example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Demonstrate continue on error
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: ech0o "$GITHUB_CONTEXT"
+        continue-on-error: true # by default its false
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"

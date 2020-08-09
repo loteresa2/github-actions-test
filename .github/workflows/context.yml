@@ -1,7 +1,8 @@
+name: Context
 on: push
 
 jobs:
-  one:
+  context-ouput:
     runs-on: ubuntu-16.04
     steps:
       - name: Dump GitHub context
@@ -28,3 +29,12 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+  functions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: functions
+        run: |
+          echo ${{ contains('hello', 'll')}}
+          echo ${{ startsWith('hello', 'he')}}
+          echo ${{ endsWith('hello', 'lo')}}
+          echo ${{ format('Hello {0} {1} {2}', 'World', '!', '!')}}

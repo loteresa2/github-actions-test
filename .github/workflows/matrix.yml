@@ -5,11 +5,21 @@ jobs:
   node-version:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
         node-version: [6,8,10] # it will run 2 * 3 times
-      fail-fast: true # if anyone of them fails then it then all mentioned in node-version will stop
-      max-parallel: 3 # no of jobs that can run in parallel
+      # fail-fast: true # if anyone of them fails then it then all mentioned in node-version will stop
+      # max-parallel: 3 # no of jobs that can run in parallel
+        include:
+          - os: ubuntu-latest
+            node-version: 8     # include cannot be used to add extra config to the matrix
+            is_ubuntu_8: "true" # however, we can include an extra value to existing config
+        exclude:
+          - os: ubuntu-latest
+            node-version: 6 # exclude this from matrix
+
     runs-on: ${{ matrix.os }}
+    env:
+      IS_UBUNTU_8: ${{ matrix.is_ubuntu_8 }}
     steps:
       - name: Log node node-version
         run: node -v 
@@ -17,4 +27,7 @@ jobs:
         with:
           node-version: ${{ matrix.node_version}}
       - name: Log node version after using actions/setup-node@v1
-        run: node -v
+        run: |
+            node -v
+            echo "Is ubuntu8? ${IS_UBUNTU_8}"
+

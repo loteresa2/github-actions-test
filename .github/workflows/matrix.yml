@@ -9,7 +9,7 @@ jobs:
         node-version: [6,8,10] # it will run 2 * 3 times
       fail-fast: true # if anyone of them fails then it then all mentioned in node-version will stop
       max-parallel: 3 # no of jobs that can run in parallel
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Log node node-version
         run: node -v 

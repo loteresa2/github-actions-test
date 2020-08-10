@@ -26,9 +26,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version}}
-      - name: Log node version after using actions/setup-node@v1
+      - name: Testing what happens if i use matrix.is_ubuntu_8
         run: |
             node -v
             echo "Is ubuntu8? ${IS_UBUNTU_8}"
-            echo "From matrix is ubuntu8? ${matrix.is_ubuntu_8}"
+          # echo "From matrix is ubuntu8? ${matrix.is_ubuntu_8}" # error bad substitution
 
